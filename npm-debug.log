@@ -1,0 +1,104 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.15.8
+3 info using node@v4.4.7
+4 verbose readDependencies loading dependencies from /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room/package.json
+5 warn package.json chat-room@1.0.0 No repository field.
+6 warn package.json chat-room@1.0.0 No README data
+7 verbose install where, deps [ '/Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room',
+7 verbose install   [ 'socket.io', 'angularrr' ] ]
+8 verbose install where, peers [ '/Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room',
+8 verbose install   [] ]
+9 verbose installManyTop reading for lifecycle /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room/package.json
+10 info preinstall chat-room@1.0.0
+11 verbose installManyTop reading scoped package data from /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room/node_modules/angular/package.json
+12 verbose installManyTop reading scoped package data from /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room/node_modules/socket.io/package.json
+13 verbose readDependencies loading dependencies from /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room/package.json
+14 verbose targetResolver reading package data from /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room/node_modules/angular/package.json
+15 verbose targetResolver reading package data from /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room/node_modules/socket.io/package.json
+16 verbose already installed skipping socket.io@^1.4.8 /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room
+17 silly cache add args [ 'angularrr@^1.0', null ]
+18 verbose cache add spec angularrr@^1.0
+19 silly cache add parsed spec Result {
+19 silly cache add   raw: 'angularrr@^1.0',
+19 silly cache add   scope: null,
+19 silly cache add   name: 'angularrr',
+19 silly cache add   rawSpec: '^1.0',
+19 silly cache add   spec: '>=1.0.0 <2.0.0',
+19 silly cache add   type: 'range' }
+20 silly addNamed angularrr@>=1.0.0 <2.0.0
+21 verbose addNamed ">=1.0.0 <2.0.0" is a valid semver range for angularrr
+22 silly addNameRange { name: 'angularrr', range: '>=1.0.0 <2.0.0', hasData: false }
+23 silly mapToRegistry name angularrr
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'angularrr',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   name: 'angularrr',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/angularrr
+28 verbose addNameRange registry:https://registry.npmjs.org/angularrr not in flight; fetching
+29 verbose request uri https://registry.npmjs.org/angularrr
+30 verbose request no auth needed
+31 info attempt registry request try #1 at 10:12:47 AM
+32 verbose request id a78b258cc04ca1eb
+33 http request GET https://registry.npmjs.org/angularrr
+34 http 404 https://registry.npmjs.org/angularrr
+35 verbose headers { 'content-type': 'application/json',
+35 verbose headers   'cache-control': 'max-age=0',
+35 verbose headers   'content-length': '2',
+35 verbose headers   'accept-ranges': 'bytes',
+35 verbose headers   date: 'Tue, 30 Aug 2016 14:12:48 GMT',
+35 verbose headers   via: '1.1 varnish',
+35 verbose headers   age: '0',
+35 verbose headers   connection: 'keep-alive',
+35 verbose headers   'x-served-by': 'cache-atl6225-ATL',
+35 verbose headers   'x-cache': 'MISS',
+35 verbose headers   'x-cache-hits': '0',
+35 verbose headers   'x-timer': 'S1472566368.043175,VS0,VE343',
+35 verbose headers   vary: 'Accept-Encoding' }
+36 silly get cb [ 404,
+36 silly get   { 'content-type': 'application/json',
+36 silly get     'cache-control': 'max-age=0',
+36 silly get     'content-length': '2',
+36 silly get     'accept-ranges': 'bytes',
+36 silly get     date: 'Tue, 30 Aug 2016 14:12:48 GMT',
+36 silly get     via: '1.1 varnish',
+36 silly get     age: '0',
+36 silly get     connection: 'keep-alive',
+36 silly get     'x-served-by': 'cache-atl6225-ATL',
+36 silly get     'x-cache': 'MISS',
+36 silly get     'x-cache-hits': '0',
+36 silly get     'x-timer': 'S1472566368.043175,VS0,VE343',
+36 silly get     vary: 'Accept-Encoding' } ]
+37 verbose stack Error: Registry returned 404 for GET on https://registry.npmjs.org/angularrr
+37 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+37 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:242:14)
+37 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+37 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:200:22)
+37 verbose stack     at emitTwo (events.js:87:13)
+37 verbose stack     at Request.emit (events.js:172:7)
+37 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+37 verbose stack     at emitOne (events.js:82:20)
+37 verbose stack     at Request.emit (events.js:169:7)
+37 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:988:12)
+38 verbose statusCode 404
+39 verbose pkgid angularrr
+40 verbose cwd /Users/robertbunch/Desktop/DigitalCrafts/7-16immersive/Unit3/chat-room
+41 error Darwin 14.5.0
+42 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+43 error node v4.4.7
+44 error npm  v2.15.8
+45 error code E404
+46 error 404 Registry returned 404 for GET on https://registry.npmjs.org/angularrr
+46 error 404
+46 error 404 'angularrr' is not in the npm registry.
+46 error 404 You should bug the author to publish it (or use the name yourself!)
+46 error 404 It was specified as a dependency of 'chat-room'
+46 error 404
+46 error 404 Note that you can also install from a
+46 error 404 tarball, folder, http url, or git url.
+47 verbose exit [ 1, true ]

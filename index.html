@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+	<script type="text/javascript">
+		// console.log(window);
+		console.log(window.io);
+		var socketio = io.connect('http://127.0.0.1:8080');
+	</script>
+
+</head>
+<body>
+
+	<h1>Chat Room</h1>
+
+	<div id="chat-window">
+		<button onclick="sendMessage()">Click here to send message!</button>
+	</div>
+
+</body>
+</html>
