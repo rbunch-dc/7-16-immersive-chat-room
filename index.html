@@ -107,9 +107,11 @@
 		var canvas = document.getElementById('canvas');
 		var context = canvas.getContext('2d');
 		var mouseDown = false;
-		var color = null;
+		var color = '#000';
 		var thickness = 10;
 		var colorChoice = document.getElementById('color-picker');
+		var mousePosition;
+		var lastMousePosition = null;
 
 		colorChoice.addEventListener('change', function(event){
 			color = colorChoice.value;
@@ -120,6 +122,63 @@
 		thicknessPicker.addEventListener('change', function(event){
 			thickness = thicknessPicker.value;
 			console.log(thickness);
+		});
+
+		canvas.addEventListener('mousedown', function(event){
+			mouseDown = true;
+		})
+
+		canvas.addEventListener('mouseup', function(event){
+			mouseDown = false;
+		})
+
+		canvas.addEventListener('mousemove', function(event){
+			if(mouseDown){
+				console.log(event);
+				var magicBrushX = event.clientX - canvas.offsetLeft;
+				var magicBrushY = event.clientY - canvas.offsetTop;
+				// console.log(magicBrushX);
+				// console.log(magicBrushY);
+
+				mousePosition = {
+					x: magicBrushX,
+					y: magicBrushY
+				}
+
+				console.log(mousePosition);
+
+				if(lastMousePosition !== null){
+					console.log(lastMousePosition);
+					console.log(mousePosition);
+					console.log(color)
+					console.log("%%%%%%%%%%%%%%%%%%")
+					context.strokeStyle = color;
+					context.lineJoin = 'round';
+					context.lineWidth = thickness;
+					context.beginPath();
+					context.moveTo(lastMousePosition.x, lastMousePosition.y);
+					context.lineTo(mousePosition.x, mousePosition.y);
+					context.closePath();
+					context.stroke();
+
+	// context.rect(20,20,150,100);
+
+				}
+
+			var drawingData = {
+				mousePosition: mousePosition,
+				lastMousePosition: lastMousePosition,
+				color: color,
+				thickness: thickness
+			}
+
+			lastMousePosition = {
+				x: mousePosition.x,
+				y: mousePosition.y
+			};
+			
+			}
+
 		})
 
 </script>
