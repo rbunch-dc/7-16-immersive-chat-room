@@ -172,6 +172,8 @@
 				thickness: thickness
 			}
 
+			socketio.emit('drawing_to_server',drawingData);
+
 			lastMousePosition = {
 				x: mousePosition.x,
 				y: mousePosition.y
@@ -183,6 +185,19 @@
 if(window.outerWidth < 500){
 	canvas.width = window.outerWidth - 10;
 }
+
+socketio.on('drawing_to_client', function(drawingData){
+	context.strokeStyle = drawingData.color;
+	context.lineJoin = "round";
+	context.lineWidth = drawingData.thickness;
+	context.beginPath();
+	context.moveTo(drawingData.lastMousePosition.x,drawingData.lastMousePosition.y);
+	context.lineTo(drawingData.mousePosition.x,drawingData.mousePosition.y);
+	context.closePath();
+	context.stroke();
+});
+
+
 
 </script>
 

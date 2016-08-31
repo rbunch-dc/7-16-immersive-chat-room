@@ -38,6 +38,8 @@ var socketIo = require('socket.io');
 // listen to the server which is listening on port XXXX
 var io = socketIo.listen(server);
 var socketUsers = [];
+var chatHistory = [];
+var currentCanvas = [];
 
 //We need to deal wiht a new socket connection
 io.sockets.on('connect', function(socket){
@@ -73,6 +75,13 @@ io.sockets.on('connect', function(socket){
 			date: data.date
 		});
 	});
+
+	socket.on('drawing_to_server',function(drawingData){
+		if(drawingData.lastMousePosition !== null){
+			io.sockets.emit('drawing_to_client', drawingData);
+		}
+	})
+
 //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE	
 	socket.on('disconnect', function(){
 		console.log(socket.id + " -- user has disconnected");
