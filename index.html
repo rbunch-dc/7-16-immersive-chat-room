@@ -1,39 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
 	<title></title>
+
+	<style type="text/css" media="screen">
+		#chat-window{
+			display:  block;
+		}
+		#chats, #chat-stuff{
+			border:  2px solid black;
+			width:  45%;
+			display: inline-block;
+			min-height: 90vh;
+		}
+	</style>
 
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 	<script type="text/javascript">
 		var name = "Anonymous";
+		var date = new Date().toLocaleString();
 		// console.log(window);
 		console.log(window.io);
 		var socketio = io.connect('http://10.150.51.230:8080');
 
 		socketio.on('message_to_client', function(data){
-			document.getElementById('chats').innerHTML += '<div class="im">'+data.message+' -- '+data.name +' -- ' +data.dannysWord+'</div>';
+			document.getElementById('chats').innerHTML += '<div class="im">' + data.message + ' -- ' + data.name + ' -- ' +data.date+'</div>';
 		})
 
+		socketio.on('users', function(name){
+			document.getElementById('chat-stuff').innerHTML += '<ul><li class="user">'+name.name+'</li></ul>'
+		});
+
 		function sendMessage(){
+			var date = new Date().toLocaleString();
 			var message = document.getElementById('message').value;
 			socketio.emit(
 				'message_to_server',
 				{
 					message: message,
-					name: name
+					name: name,
+					date: date
 				}
 			);
 		}
 
 		function sendName(){
 			name = document.getElementById('nameInput').value;
+			socketio.emit('name_to_server',{name: name});
 		}
 
 	</script>
 
 </head>
-<body>
+<body ng-controller="myController">
 
 	<h1>Chat Room</h1>
 
@@ -42,11 +62,28 @@
 		<button onclick="sendName()">Submit Name</button>
 	</div>
 
-	<div id="chat-window">
 		<input type="text" id="message" placeholder="Your message here">
 		<button onclick="sendMessage()">Click here to send message!</button>
+	<div id="chat-window">
 		<div id="chats"></div>
+		<div id="chat-stuff">
+			<ul>
+				<li ng-repeat="name in userNames">
+					{{name}}
+				</li>
+			</ul>
+		</div>
 	</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script type="text/javascript">
+	var myApp = angular.module('myApp', []);
+	myApp.controller('myController',function($scope){
+		$scope.message = "Test";
+	});
+</script>
+
+
 
 </body>
 </html>
