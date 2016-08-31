@@ -38,23 +38,23 @@ var socketIo = require('socket.io');
 // listen to the server which is listening on port XXXX
 var io = socketIo.listen(server);
 var socketUsers = [];
+
 //We need to deal wiht a new socket connection
 io.sockets.on('connect', function(socket){
-
-	console.log(socket);
-
+	// console.log(socket);
 	socketUsers.push({
-		socketID: socket.id,
-		name: 'Anonymous'
-	})
+		'socketID': socket.con,
+		'name': 'Anonymous'
+	});
+
+	io.sockets.emit('users',{
+		'socketUsers': socketUsers
+	});	
 
 	// console.log(socket);
-	socketUsers.push(socket);
 	console.log("Someone connected via a socket!");
 	socket.on('name_to_server', function(name){
-		io.sockets.emit('users',{
-			name: name.name
-		});
+
 	});
 	socket.on('message_to_server', function(data){
 		io.sockets.emit('message_to_client',{
@@ -64,12 +64,12 @@ io.sockets.on('connect', function(socket){
 		});
 	});
 	socket.on('disconnect', function(){
-		console.log("A user has disconnected");
-		var user = socketUsers.indexOf(socket);
-		socketUsers.splice(user,1);
+		// console.log("A user has disconnected");
+		// var user = socketUsers.indexOf(socket);
+		// socketUsers.splice(user,1);
 	});
 
 });
 
-server.listen(8080);
+server.listen(8000);
 console.log('Listening on Port 8080.');
