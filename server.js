@@ -41,6 +41,7 @@ var socketUsers = [];
 
 //We need to deal wiht a new socket connection
 io.sockets.on('connect', function(socket){
+	// console.log(socket.id)
 	// console.log(socket);
 	socketUsers.push({
 		socketID: socket.id,
@@ -54,14 +55,17 @@ io.sockets.on('connect', function(socket){
 
 	//Someone just changed their name.
 	socket.on('name_to_server', function(name){
+		console.log(socket.id);
 		for(var i = 0; i<socketUsers.length; i++){
 			if(socketUsers[i].socketID == socket.id){
 				socketUsers[i].name = name;
 				break;
 			}
 		}
-		io.sockets.emit('users',socketUsers);	
+		io.sockets.emit('users',socketUsers);
 	});
+
+
 	socket.on('message_to_server', function(data){
 		io.sockets.emit('message_to_client',{
 			message: data.message,
@@ -69,6 +73,7 @@ io.sockets.on('connect', function(socket){
 			date: data.date
 		});
 	});
+//HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE	
 	socket.on('disconnect', function(){
 		console.log(socket.id + " -- user has disconnected");
 		for(var i = 0; i<socketUsers.length; i++){
@@ -79,7 +84,7 @@ io.sockets.on('connect', function(socket){
 		}
 		io.sockets.emit('users',socketUsers);	
 	});
-
+//HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
 });
 
 server.listen(8080);
