@@ -10,7 +10,7 @@
 		#chats, #chat-stuff{
 			border:  2px solid black;
 			width:  45%;
-			display: inline-block;
+			float: left;
 			min-height: 90vh;
 		}
 	</style>
@@ -18,22 +18,21 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 	<script type="text/javascript">
-		var name = "Anonymous";
-		var date = new Date().toLocaleString();
+		var name = prompt("What is your name");
 		// console.log(window);
 		// console.log(window.io);
 		var socketio = io.connect('http://127.0.0.1:8080');
+		socketio.emit('name_to_server',name);
+
 
 		socketio.on('message_to_client', function(data){
 			document.getElementById('chats').innerHTML += '<div class="im">' + data.message + ' -- ' + data.name + ' -- ' +data.date+'</div>';
 		})
 
-		socketio.on('users', function(data){
+		socketio.on('users', function(socketUsers){
 			var newHTML = "";
-			console.log(data.socketUsers.length);
-			for(var i=0; i<data.socketUsers.length; i++){
-				console.log(i);
-				 newHTML += '<li class="user">'+data.socketUsers[i].name+'</li>'
+			for(var i=0; i<socketUsers.length; i++){
+				 newHTML += '<li class="user">'+socketUsers[i].name+'</li>'
 			}
 			document.getElementById('chat-stuff').innerHTML = newHTML;
 		});
@@ -53,7 +52,7 @@
 
 		function sendName(){
 			name = document.getElementById('nameInput').value;
-			socketio.emit('name_to_server',{name: name});
+			socketio.emit('name_to_server',name);
 		}
 
 	</script>
