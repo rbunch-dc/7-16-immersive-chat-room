@@ -22,12 +22,29 @@ var server = http.createServer(function(req, res){
 var socketIo = require('socket.io');
 // listen to the server which is listening on port XXXX
 var io = socketIo.listen(server);
+var socketUsers = [];
 //We need to deal wiht a new socket connection
 io.sockets.on('connect', function(socket){
 	// console.log(socket);
+
+	userSocketStuff = {
+		socket: socket
+		// name: name
+	}
+
+	socketUsers.push(socket);
 	console.log("Someone connected via a socket!");
 	socket.on('message_to_server', function(data){
-		console.log('Someone senet a message to the server!!');
+		io.sockets.emit('message_to_client',{
+			message: data.message,
+			name: data.name,
+			dannysWord: 'Hambone'
+		});
+	});
+	socket.on('disconnect', function(){
+		console.log("A user has disconnected");
+		var user = socketUsers.indexOf(socket);
+		socketUsers.splice(user,1);
 	});
 });
 

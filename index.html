@@ -6,9 +6,30 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 
 	<script type="text/javascript">
+		var name = "Anonymous";
 		// console.log(window);
 		console.log(window.io);
-		var socketio = io.connect('http://127.0.0.1:8080');
+		var socketio = io.connect('http://10.150.51.230:8080');
+
+		socketio.on('message_to_client', function(data){
+			document.getElementById('chats').innerHTML += '<div class="im">'+data.message+' -- '+data.name +' -- ' +data.dannysWord+'</div>';
+		})
+
+		function sendMessage(){
+			var message = document.getElementById('message').value;
+			socketio.emit(
+				'message_to_server',
+				{
+					message: message,
+					name: name
+				}
+			);
+		}
+
+		function sendName(){
+			name = document.getElementById('nameInput').value;
+		}
+
 	</script>
 
 </head>
@@ -16,8 +37,15 @@
 
 	<h1>Chat Room</h1>
 
+	<div id="name">
+		<input type="text" id="nameInput">
+		<button onclick="sendName()">Submit Name</button>
+	</div>
+
 	<div id="chat-window">
+		<input type="text" id="message" placeholder="Your message here">
 		<button onclick="sendMessage()">Click here to send message!</button>
+		<div id="chats"></div>
 	</div>
 
 </body>
