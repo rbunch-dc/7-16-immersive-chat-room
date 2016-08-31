@@ -7,7 +7,7 @@
 		#chat-window{
 			display:  block;
 		}
-		#chats, #chat-stuff, #canvas{
+		#chats, #chat-stuff{
 			border:  2px solid black;
 			width:  45%;
 			float: left;
@@ -17,7 +17,8 @@
 			width: 15%;
 		}
 		#canvas{
-			width: 35%;
+			border: 2px solid black;
+			float: left;
 		}
 
 	</style>
@@ -77,6 +78,10 @@
 	<form onsubmit="stopSubmission()">
 		<input type="text" id="message" placeholder="Your message here">
 		<button onclick="sendMessage()">Click here to send message!</button>
+
+	<canvas id="canvas" width="500px" height="500px"></canvas>
+
+
 	<div id="chat-window">
 		<div id="chats"></div>
 		<div id="chat-stuff">
@@ -88,7 +93,6 @@
 		</div>
 	</div>
 	</form>
-	<canvas id="canvas"></canvas>
 	<div id="tool-bar">
 		<input type="color" id="color-picker">
 		<label>Choose your thickness</label>
@@ -130,13 +134,14 @@
 
 		canvas.addEventListener('mouseup', function(event){
 			mouseDown = false;
+			lastMousePosition = null;
 		})
 
 		canvas.addEventListener('mousemove', function(event){
 			if(mouseDown){
-				console.log(event);
-				var magicBrushX = event.clientX - canvas.offsetLeft;
-				var magicBrushY = event.clientY - canvas.offsetTop;
+				// console.dir(canvas);
+				var magicBrushX = event.pageX - canvas.offsetLeft;
+				var magicBrushY = event.pageY - canvas.offsetTop;
 				// console.log(magicBrushX);
 				// console.log(magicBrushY);
 
@@ -144,22 +149,17 @@
 					x: magicBrushX,
 					y: magicBrushY
 				}
-
 				console.log(mousePosition);
 
 				if(lastMousePosition !== null){
-					console.log(lastMousePosition);
-					console.log(mousePosition);
-					console.log(color)
-					console.log("%%%%%%%%%%%%%%%%%%")
 					context.strokeStyle = color;
 					context.lineJoin = 'round';
 					context.lineWidth = thickness;
 					context.beginPath();
-					context.moveTo(lastMousePosition.x, lastMousePosition.y);
+					context.moveTo(lastMousePosition.x, lastMousePosition.y);					
 					context.lineTo(mousePosition.x, mousePosition.y);
-					context.closePath();
 					context.stroke();
+					context.closePath();
 
 	// context.rect(20,20,150,100);
 
@@ -180,6 +180,9 @@
 			}
 
 		})
+if(window.outerWidth < 500){
+	canvas.width = window.outerWidth - 10;
+}
 
 </script>
 
