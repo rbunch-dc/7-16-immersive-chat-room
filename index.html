@@ -66,7 +66,7 @@
 		<input type="text" id="nameInput">
 		<button onclick="sendName()">Submit Name</button>
 	</div>
-
+<form onsubmit="stopSubmission()">
 		<input type="text" id="message" placeholder="Your message here">
 		<button onclick="sendMessage()">Click here to send message!</button>
 	<div id="chat-window">
@@ -79,6 +79,7 @@
 			</ul>
 		</div>
 	</div>
+	</form>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script type="text/javascript">

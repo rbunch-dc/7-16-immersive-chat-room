@@ -76,8 +76,8 @@ io.sockets.on('connect', function(socket){
 				socketUsers.splice(i, 1);
 				break;
 			}
-			io.sockets.emit('users',socketUsers);	
 		}
+		io.sockets.emit('users',socketUsers);	
 	});
 
 });
